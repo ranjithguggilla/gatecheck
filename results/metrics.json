@@ -1,0 +1,455 @@
+{
+  "bandits": {
+    "policies": {
+      "epsilon_greedy": {
+        "arm_rates": [
+          0.19020134228187918,
+          0.18200004396667327
+        ],
+        "horizon": 60000,
+        "identified_best_arm_share": 0.95,
+        "mean_pulls_inferior_arm": 9529.885,
+        "mean_regret": 78.15742979462335,
+        "mean_retained_players": 11350.995,
+        "mean_share_best_arm": 0.8411685833333334,
+        "policy": "epsilon_greedy",
+        "seeds": 200,
+        "std_pulls_inferior_arm": 12988.592735474273,
+        "std_regret": 106.52332371840096
+      },
+      "thompson": {
+        "arm_rates": [
+          0.19020134228187918,
+          0.18200004396667327
+        ],
+        "horizon": 60000,
+        "identified_best_arm_share": 0.985,
+        "mean_pulls_inferior_arm": 9126.385,
+        "mean_regret": 74.84820592442203,
+        "mean_retained_players": 11340.71,
+        "mean_share_best_arm": 0.8478935833333332,
+        "policy": "thompson",
+        "seeds": 200,
+        "std_pulls_inferior_arm": 8533.284081339329,
+        "std_regret": 69.98400835948227
+      },
+      "ucb1": {
+        "arm_rates": [
+          0.19020134228187918,
+          0.18200004396667327
+        ],
+        "horizon": 60000,
+        "identified_best_arm_share": 0.995,
+        "mean_pulls_inferior_arm": 21367.635,
+        "mean_regret": 175.2423489254391,
+        "mean_retained_players": 11247.47,
+        "mean_share_best_arm": 0.64387275,
+        "policy": "ucb1",
+        "seeds": 200,
+        "std_pulls_inferior_arm": 2927.9309383374066,
+        "std_regret": 24.01283507164789
+      },
+      "uniform": {
+        "arm_rates": [
+          0.19020134228187918,
+          0.18200004396667327
+        ],
+        "horizon": 60000,
+        "identified_best_arm_share": 1.0,
+        "mean_pulls_inferior_arm": 30000.0,
+        "mean_regret": 246.03894945625066,
+        "mean_retained_players": 11176.36,
+        "mean_share_best_arm": 0.5,
+        "policy": "uniform",
+        "seeds": 200,
+        "std_pulls_inferior_arm": 0.0,
+        "std_regret": 5.698606254521627e-14
+      }
+    },
+    "savings_against_uniform": {
+      "epsilon_greedy": {
+        "extra_retained_players": 174.63500000000022,
+        "players_spared_inferior_arm": 20470.114999999998,
+        "regret_reduction": 167.8815196616273,
+        "regret_reduction_pct": 68.23371666666911
+      },
+      "thompson": {
+        "extra_retained_players": 164.34999999999854,
+        "players_spared_inferior_arm": 20873.614999999998,
+        "regret_reduction": 171.19074353182862,
+        "regret_reduction_pct": 69.5787166666751
+      },
+      "ucb1": {
+        "extra_retained_players": 71.10999999999876,
+        "players_spared_inferior_arm": 8632.365000000002,
+        "regret_reduction": 70.79660053081156,
+        "regret_reduction_pct": 28.774550000019506
+      }
+    }
+  },
+  "bayes": {
+    "diff_mean_pp": -0.8200318380785736,
+    "draws": 400000,
+    "expected_loss_if_hold_pp": 5.0306234437658525e-05,
+    "expected_loss_if_ship_pp": 0.8200821443130114,
+    "floor_pp": -0.2,
+    "hdi_high_pp": -0.30811253327247823,
+    "hdi_low_pp": -1.3258940740932312,
+    "metric": "retention_7",
+    "posterior_mean_control": 0.19021520289919913,
+    "posterior_mean_treatment": 0.18201402475214878,
+    "prior_alpha": 1.0,
+    "prior_beta": 1.0,
+    "prob_treatment_better": 0.0007575,
+    "prob_worse_than_floor": 0.9917025
+  },
+  "bootstrap": {
+    "ci_high_pp": -0.3178454087506368,
+    "ci_low_pp": -1.321829936465206,
+    "draws": 20000,
+    "floor_pp": -0.2,
+    "mean_pp": -0.8198666967941656,
+    "metric": "retention_7",
+    "point_estimate_pp": -0.8201298315205913,
+    "share_of_draws_below_floor": 0.9923,
+    "share_of_draws_negative": 0.99945,
+    "std_error_pp": 0.25646913951379263
+  },
+  "dataset": {
+    "control_arm": "gate_30",
+    "n_control": 44700,
+    "n_treatment": 45489,
+    "primary_metric": "retention_7",
+    "rows": 90189,
+    "treatment_arm": "gate_40"
+  },
+  "decision": {
+    "financial_impact": {
+      "absolute_diff_pp": -0.8201298315205913,
+      "annual_new_players": 18000000.0,
+      "annual_revenue_delta_high_usd": -100287.45538989993,
+      "annual_revenue_delta_low_usd": -426748.760214624,
+      "annual_revenue_delta_usd": -263507.71486756596,
+      "assumptions": [
+        "1,500,000 new players a month reach the gate, 100% of them under the change",
+        "a player retained at day 7 monetises for 21 further days",
+        "average revenue per daily active player is $0.085",
+        "the day-7 retention gap is assumed to persist rather than close on its own",
+        "no change in install volume, store ranking or acquisition cost is modelled"
+      ],
+      "ci_high_pp": -0.312130268876128,
+      "ci_low_pp": -1.3281940871914846,
+      "retained_players_delta_per_year": -147623.36967370642,
+      "revenue_per_retained_player_usd": 1.7850000000000001,
+      "rollout_share": 1.0
+    },
+    "verdict": {
+      "blocking_gate": null,
+      "confidence": "high",
+      "reasons": [
+        "retention_7 moves down by 0.82pp (95% interval -1.33pp to -0.31pp, p=0.001554)",
+        "the posterior puts the chance the change is an improvement at 0.08%",
+        "the whole interval sits below the -0.20pp floor the team agreed to tolerate, so the loss is both real and large enough to act on",
+        "the posterior chance the change is worse than the floor is 99.2%"
+      ],
+      "recommendation": "roll back"
+    }
+  },
+  "engagement": {
+    "cohens_d": -0.0009769544647625053,
+    "mann_whitney_p_value": 0.05020880772044255,
+    "mann_whitney_u": 1009027049.5,
+    "mean_control": 52.45626398210291,
+    "mean_treatment": 51.29877552814966,
+    "median_control": 17.0,
+    "median_treatment": 16.0,
+    "metric": "sum_gamerounds",
+    "rank_biserial": -0.007526563813175513,
+    "trimmed_mean_ci_high": 0.9119288108229846,
+    "trimmed_mean_ci_low": -1.4140945296103336,
+    "trimmed_mean_difference": -0.2796191012045739,
+    "welch_p_value": 0.8833711341172519,
+    "welch_t": -0.14669748196454874,
+    "winsor_cut": 1073.6240000000107
+  },
+  "environment": {
+    "arviz": "0.23.4",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "python": "3.10.12",
+    "scikit_learn": "1.7.2",
+    "scipy": "1.15.3",
+    "seed": 20240917,
+    "statsmodels": "0.15.0"
+  },
+  "figures": {
+    "bandits": "bandit_regret.png",
+    "bootstrap": "bootstrap_difference.png",
+    "engagement": "engagement_distribution.png",
+    "peeking": "peeking_cost.png",
+    "placebo": "targeting_placebo.png",
+    "posterior": "posterior_day7.png",
+    "power": "power_curve.png",
+    "retention": "retention_by_arm.png"
+  },
+  "frequentist": {
+    "retention_1": {
+      "absolute_diff_pp": -0.5905169787341458,
+      "chi_square": 3.159100787878226,
+      "chi_square_p_value": 0.07550476210309098,
+      "diff_ci_high_pp": 0.058209506975222605,
+      "diff_ci_low_pp": -1.2391904992707325,
+      "metric": "retention_1",
+      "n_control": 44700,
+      "n_treatment": 45489,
+      "p_value": 0.07440965529691913,
+      "rate_control": 0.4481879194630872,
+      "rate_treatment": 0.44228274967574577,
+      "relative_ci_high_pct": 0.13080478541465101,
+      "relative_ci_low_pct": -2.7449855941144796,
+      "relative_lift_pct": -1.317565585974656,
+      "successes_control": 20034,
+      "successes_treatment": 20119,
+      "z_statistic": -1.7840862247974725
+    },
+    "retention_7": {
+      "absolute_diff_pp": -0.8201298315205913,
+      "chi_square": 9.959086799559167,
+      "chi_square_p_value": 0.00160057426790583,
+      "diff_ci_high_pp": -0.312130268876128,
+      "diff_ci_low_pp": -1.3281940871914846,
+      "metric": "retention_7",
+      "n_control": 44700,
+      "n_treatment": 45489,
+      "p_value": 0.0015542499756143289,
+      "rate_control": 0.19020134228187918,
+      "rate_treatment": 0.18200004396667327,
+      "relative_ci_high_pct": -1.6633574257273742,
+      "relative_ci_low_pct": -6.8891150431617865,
+      "relative_lift_pct": -4.311903489646019,
+      "successes_control": 8502,
+      "successes_treatment": 8279,
+      "z_statistic": -3.164358912748191
+    }
+  },
+  "multiplicity": {
+    "retention_1": {
+      "benjamini_hochberg_p_value": 0.07440965529691913,
+      "benjamini_hochberg_significant": false,
+      "holm_p_value": 0.1004176154408851,
+      "holm_significant": false,
+      "raw_p_value": 0.07440965529691913
+    },
+    "retention_7": {
+      "benjamini_hochberg_p_value": 0.004662749926842987,
+      "benjamini_hochberg_significant": true,
+      "holm_p_value": 0.004662749926842987,
+      "holm_significant": true,
+      "raw_p_value": 0.0015542499756143289
+    },
+    "sum_gamerounds": {
+      "benjamini_hochberg_p_value": 0.07440965529691913,
+      "benjamini_hochberg_significant": false,
+      "holm_p_value": 0.1004176154408851,
+      "holm_significant": false,
+      "raw_p_value": 0.05020880772044255
+    }
+  },
+  "peeking": {
+    "sequential_readout": {
+      "boundary_z": 2.5318641662597656,
+      "first_look_crossing_boundary": 3,
+      "first_look_crossing_naive": 2,
+      "looks": 10,
+      "metric": "retention_7",
+      "naive_boundary_z": 1.9599639845400545,
+      "players_per_arm_used": 44700,
+      "players_saved_by_early_stop": 62580,
+      "sample_sizes": [
+        4470,
+        8940,
+        13410,
+        17880,
+        22350,
+        26820,
+        31290,
+        35760,
+        40230,
+        44700
+      ],
+      "z_values": [
+        -1.3481575882854362,
+        -2.518569508793132,
+        -2.608578939495429,
+        -3.0137176009215874,
+        -3.2666836825640946,
+        -2.720844286758303,
+        -3.2219917881686317,
+        -3.344111102988154,
+        -3.153427214366893,
+        -3.1018640755029283
+      ]
+    },
+    "study": {
+      "alpha": 0.05,
+      "bonferroni_false_positive_rate": 0.028,
+      "boundary_z_ratio": 1.2917911687310515,
+      "calibrated_boundary_z": 2.5318641662597656,
+      "calibrated_false_positive_rate": 0.057,
+      "calibration_replications": 1000,
+      "fixed_horizon_false_positive_rate": 0.05,
+      "inflation_factor": 3.9,
+      "looks": 10,
+      "metric": "retention_7",
+      "n_per_pseudo_arm": 22350,
+      "naive_peeking_false_positive_rate": 0.195,
+      "replications": 2000,
+      "sample_size_inflation_at_80_power": 1.4499398803475276,
+      "validation_replications": 1000
+    }
+  },
+  "power": {
+    "achieved_power_at_observed_effect": 0.8830703925274531,
+    "alpha": 0.05,
+    "baseline_rate": 0.19020134228187918,
+    "mde_absolute_pp": 0.7408806852227449,
+    "mde_relative_pct": 3.895244251876817,
+    "metric": "retention_7",
+    "n_per_arm": 44700,
+    "observed_effect_pp": -0.8201298315205913,
+    "target_power": 0.8
+  },
+  "targeting": {
+    "leakage": {
+      "auc_day_one_only": 0.7090596138772999,
+      "auc_day_one_only_std": 0.0029187484721465333,
+      "auc_majority_baseline": 0.5,
+      "auc_with_engagement": 0.8884636999726185,
+      "auc_with_engagement_std": 0.0019298143870906178,
+      "base_rate": 0.1860648194347426,
+      "leak_contribution_auc": 0.17940408609531866,
+      "n_rows": 90189,
+      "note": "The engagement feature spans days 1 to 14, so it overlaps the day-7 outcome window. The gap between the two rows is the size of the leak, not a modelling win."
+    },
+    "placebo": {
+      "observed_spread_pp": 1.3892954105263502,
+      "permutation_p_value": 0.47540983606557374,
+      "placebo_abs_p95_pp": 4.1595575534924505,
+      "placebo_max_abs_pp": 5.408910096597635,
+      "placebo_mean_pp": -0.12718325976092476,
+      "placebo_runs": 60,
+      "placebo_std_pp": 1.9526146919164902,
+      "spreads_pp": [
+        -0.71989246061821,
+        0.1553470185432504,
+        -1.3265470173342564,
+        -1.7578153224782707,
+        2.6931249834382136,
+        -0.6370163858774203,
+        0.9793579823870344,
+        -0.43526221733461157,
+        -0.490866200511586,
+        0.5529908554822993,
+        -5.408910096597635,
+        -1.2517664626779195,
+        1.3513175790949628,
+        -4.58046732596081,
+        -1.627929142834586,
+        2.646554607571463,
+        1.567603537608886,
+        -0.6750621589260597,
+        1.4603193326798936,
+        0.41638055468397606,
+        2.0928297052627025,
+        -2.1415213351635014,
+        -1.9539572418784235,
+        1.3699672347840253,
+        1.9351025861276376,
+        2.8640508312643718,
+        -1.5224763653425093,
+        -0.10053131670513249,
+        0.10311576320236465,
+        1.002409915581004,
+        -1.2168459818197876,
+        1.4268181572108907,
+        -0.16834083794367571,
+        -4.745205983995099,
+        0.20035966444549302,
+        0.15123818239241027,
+        -1.0360309051408445,
+        1.5374641181473137,
+        3.7222244581980313,
+        -1.7562805476176113,
+        1.472624279728854,
+        0.8085856026405852,
+        -2.428697704306246,
+        -0.04690563926676439,
+        -3.155874480746035,
+        0.07585153884385604,
+        0.5037221301173567,
+        -0.06771944556235032,
+        0.3261593752602543,
+        -1.0251718552643978,
+        1.6021658442389175,
+        3.4641174910049477,
+        0.6347825974198584,
+        -0.022540301539294982,
+        -0.7139838345852995,
+        -1.2097072725984566,
+        -2.159804340989116,
+        -4.137404407573064,
+        1.5196521988627254,
+        2.2533008773099104
+      ],
+      "verdict": "no usable targeting signal: the real spread is inside the placebo distribution"
+    }
+  },
+  "validity": {
+    "assignment_entropy_bits": 0.9999447926442555,
+    "blocking_reason": null,
+    "covariate_balance": {
+      "can_test_covariate_balance": false,
+      "note": "userid is the only pre-assignment column, so covariate balance cannot be tested and no subgroup split in this dataset is causally interpretable.",
+      "post_treatment_columns": [
+        "sum_gamerounds",
+        "retention_1",
+        "retention_7"
+      ],
+      "pre_treatment_columns": [
+        "userid"
+      ]
+    },
+    "duplicates": {
+      "clean": true,
+      "n_duplicate_ids": 0,
+      "n_ids_in_both_arms": 0,
+      "n_rows": 90189,
+      "n_unique_ids": 90189
+    },
+    "engagement_outliers": {
+      "maximum": 49854.0,
+      "metric": "sum_gamerounds",
+      "n_above_p999": 91,
+      "p99": 493.0,
+      "p999": 1073.6240000000107,
+      "ratio_max_to_p99": 101.1237322515213,
+      "winsor_cut": 1073.6240000000107
+    },
+    "passed": true,
+    "reasons": [
+      "split is mildly uneven (p=0.0086) but stays above the 0.0005 alarm threshold, so the read is allowed to stand",
+      "all 90189 player ids appear exactly once, in one arm",
+      "sum_gamerounds tops out at 49,854 against a 99th percentile of 493 (101x), so the engagement test is run winsorised at 1,074 and with a rank test alongside it"
+    ],
+    "srm": {
+      "alarm_threshold": 0.0005,
+      "chi_square": 6.9024049496058275,
+      "expected_share_treatment": 0.5,
+      "n_control": 44700,
+      "n_treatment": 45489,
+      "observed_share_treatment": 0.5043741476233243,
+      "p_value": 0.008607987810836243,
+      "triggered": false
+    }
+  }
+}
