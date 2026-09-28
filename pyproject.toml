@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gatecheck"
+version = "0.1.0"
+description = "Validity gates, inference and a shippable verdict for mobile game A/B tests"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Ranjith Guggilla", email = "ranjithguggilla668@gmail.com" }]
+keywords = ["ab-testing", "experimentation", "bayesian", "bandits", "retention"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+  "pandas>=2.2",
+  "numpy>=1.26",
+  "scipy>=1.11",
+  "matplotlib>=3.8",
+  "pyarrow>=15.0",
+  "arviz>=0.18",
+  "statsmodels>=0.14",
+  "scikit-learn>=1.4",
+  "typer>=0.12",
+  "rich>=13.7",
+  "streamlit>=1.33",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "hypothesis>=6.100", "ruff>=0.5"]
+
+[project.scripts]
+gatecheck = "gatecheck.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "C4", "SIM", "ARG", "RET"]
+ignore = ["B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/gatecheck/charts.py" = ["E402"]
+"src/gatecheck/bandits.py" = ["ARG001"]
+"tests/*" = ["ARG001"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["ignore::FutureWarning"]
