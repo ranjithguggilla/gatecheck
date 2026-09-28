@@ -1,0 +1,95 @@
+name: ci
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          pip install -e .
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Test
+        run: pytest -q
+
+  analysis-artifact:
+    needs: lint-and-test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Pinned to the interpreter recorded in results/metrics.json so the
+      # reproduction check below compares like with like.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Set the committed results aside
+        run: |
+          cp results/metrics.json /tmp/committed-metrics.json
+          rm -f assets/*.png results/metrics.json
+
+      - name: Run the full analysis
+        run: gatecheck run
+
+      - name: Check every committed number reproduced
+        run: python scripts/verify_metrics.py /tmp/committed-metrics.json results/metrics.json
+
+      - name: Check the figures were regenerated
+        run: |
+          python - <<'PY'
+          import pathlib, sys
+          figures = sorted(pathlib.Path("assets").glob("*.png"))
+          if len(figures) != 8:
+              sys.exit(f"expected 8 figures, found {len(figures)}")
+          empty = [f.name for f in figures if f.stat().st_size < 5_000]
+          if empty:
+              sys.exit(f"figures look empty: {empty}")
+          print(f"regenerated {len(figures)} figures")
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gatecheck-analysis
+          path: |
+            results/metrics.json
+            assets/*.png
+          if-no-files-found: error
+          retention-days: 30
